@@ -1,10 +1,8 @@
 <?php
 
 function build_html_head()
-{
+{	
 	session_start();
-	/*if(!isset($_SESSION['cart'])
-		$_SESSION['cart'] = array();*/
 	echo '<html>';
 	echo '<head>';
 

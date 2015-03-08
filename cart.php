@@ -11,16 +11,13 @@ echo '<main class="cart">';
 
 //Check to see if Clear Cart button has been pressed
 if(isset($_POST['Clear_Cart']))
-	$_SESSION['cart']['order'] = array();
+	$_SESSION['cart']=null;
 
 if(!isset($_SESSION['cart']['order']))
 	$_SESSION['cart']['order'] = array();
 
-//print_r($_POST);
 
 array_push($_SESSION['cart']['order'], array("PizzaID"=>$_POST['PizzaID'], "Size"=>$_POST['size'], "Quantity"=>$_POST['quantity']));
-
-//print_r($_SESSION['cart']);
 
 echo '<h1>Cart</h1>';
 
@@ -33,9 +30,9 @@ echo <<<END
 </form>
 END;
 
-//Checkout buttonecho 
+//Checkout button
 echo <<<END
-<form action="checkout.php">
+<form action="signup.php">
 <input type="submit" value="Checkout">
 <form>
 END;

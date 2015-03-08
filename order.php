@@ -9,13 +9,14 @@ navigation_header();
 
 echo '<main>';
 
-insertCustomer($_SESSION['cart']['name'], $_SESSION['cart']['address'], $_SESSION['cart']['email'], $_SESSION['cart']['phone'], $_SESSION['cart']['creditcard']);
+if($_SESSION['cart']['signin'] != 1)
+	updateCustomer($_SESSION['cart']['name'], $_SESSION['cart']['address'], $_SESSION['cart']['email'], $_SESSION['cart']['phone'], $_SESSION['cart']['creditcard']);
 
 foreach($_SESSION['cart']['order'] as $order)
 	if($order['PizzaID'] > 0)
 		insertOrder($order['PizzaID'], $order['Size'], $order['Quantity'], $_SESSION['cart']['email']);
 
-echo 'Your order has been placed. Thank you ' . $_SESSION['cart']['name'] . '.';
+echo 'Your order has been placed. Thank you ' . getName($_SESSION['cart']['email']) . '.';
 
 echo '</main>';
 
@@ -29,10 +30,18 @@ function insertOrder($pizzaID, $size, $quantity, $email)
 	return mysql_fetch_row($result);
 }
 
-function insertCustomer($name, $address, $email, $Phone, $CreditCard)
+function updateCustomer($name, $address, $email, $Phone, $CreditCard)
 {
-	$sql = "INSERT INTO customer(name, address, email, Phone, CreditCard) VALUES ('$name', '$address', '$email', '$Phone', '$CreditCard')";
+	//$sql = "INSERT INTO customer(name, address, email, Phone, CreditCard) VALUES ('$name', '$address', '$email', '$Phone', '$CreditCard')";
+	$sql = "UPDATE customer SET name='$name', address='$address', Phone='$Phone', CreditCard='$CreditCard' WHERE email='$email'";
 	$result = mysql_query($sql);
 	return mysql_fetch_row($result);
+}
+
+function getName($email)
+{
+	$sql = "SELECT name FROM customer WHERE email='$email'";
+	$result = mysql_query($sql);
+	return mysql_fetch_row($result)[0];
 }
 ?>

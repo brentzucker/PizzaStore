@@ -237,3 +237,14 @@ li.entry
 	width:90%;
 	text-align:center;
 }
+
+.sign table
+{
+	width:50%;
+	margin-left:25%;
+}
+
+.sign td
+{
+	vertical-align:top;
+}

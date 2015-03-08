@@ -1,29 +1,38 @@
 <?php
+require_once 'login.php';
 require_once 'html_head.php';
 require_once 'header_pizza.php';
 require_once 'footer_pizza.php';
 
-session_start();
-
-$name = $_POST['name'];
-$creditcard = $_POST['creditcard'];
-$address = $_POST['address'];
-$phone = $_POST['phone'];
-$email = $_POST['email'];
-
-if(!(strlen($name) > 0 && strlen($creditcard) > 0 && strlen($address) > 0 && strlen($phone) > 0 && strlen($email) > 0))
-{
-	header('Location: checkout.php');
-}
-
-$_SESSION['cart']['name'] = $name;
-$_SESSION['cart']['creditcard'] = $creditcard;
-$_SESSION['cart']['address'] = $address;
-$_SESSION['cart']['phone'] = $phone;
-$_SESSION['cart']['email'] = $email;
+if($_POST['signin'] != 1)
+	if(!(strlen($name) > 0 && strlen($creditcard) > 0 && strlen($address) > 0 && strlen($phone) > 0 ))
+	{
+		header('Location: checkout.php');
+	}
 
 build_html_head();
 navigation_header();
+
+if($_POST['signin'] != 1)
+{
+	$name = $_POST['name'];
+	$creditcard = $_POST['creditcard'];
+	$address = $_POST['address'];
+	$phone = $_POST['phone'];
+	$email = $_POST['email'];
+
+	$_SESSION['cart']['email'] = $email;
+	$_SESSION['cart']['name'] = $name;
+	$_SESSION['cart']['creditcard'] = $creditcard;
+	$_SESSION['cart']['address'] = $address;
+	$_SESSION['cart']['phone'] = $phone;
+}
+else
+{
+	$email = $_POST['email'];
+	$_SESSION['cart']['signin'] = 1;
+	$_SESSION['cart']['email'] = $email;
+}
 
 echo '<main class="confirmation">';
 
@@ -63,7 +72,7 @@ function printItem($item)
 	echo '<table class="entry-table">';
 	echo '<tr>';
 	//echo '<td><img src="assets/images/' . getPizzaImage($item['PizzaID'])[0] . '"></td>';
-	echo '<td><h3>' . getPizzaName($item['PizzaID']) . ' Pizza</h3></td>';
+	echo '<td><h3>' . getPizzaName($item['PizzaID'])[0] . ' Pizza</h3></td>';
 	echo '<td><strong>Size:</strong><br>' . $item['Size'] . '</td>';
 	echo '<td><strong>Quantity:</strong><br>' . $item['Quantity'] .'</td>';
 	echo '</tr>';
