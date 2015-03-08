@@ -35,6 +35,7 @@ function navigation_header()
 {
 	$logo = 'assets/images/doughboy_logo.jpg';
 	echo '<body>';
+	echo '<div id="top"></div>';
 	echo '<header>';
 	
 	echo '<img id="logo" src="' . $logo . '">';
