@@ -75,6 +75,7 @@ function printItem($item)
 	echo '<td><h3>' . getPizzaName($item['PizzaID'])[0] . ' Pizza</h3></td>';
 	echo '<td><strong>Size:</strong><br>' . $item['Size'] . '</td>';
 	echo '<td><strong>Quantity:</strong><br>' . $item['Quantity'] .'</td>';
+	echo '<td><strong>Price:</strong><br>' . $item['Price'] . '</td>';
 	echo '</tr>';
 	echo '</table>';
 	echo '</li>';

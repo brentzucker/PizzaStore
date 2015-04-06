@@ -17,7 +17,22 @@ if(!isset($_SESSION['cart']['order']))
 	$_SESSION['cart']['order'] = array();
 
 
-array_push($_SESSION['cart']['order'], array("PizzaID"=>$_POST['PizzaID'], "Size"=>$_POST['size'], "Quantity"=>$_POST['quantity']));
+$pizza_price = getPizzaPrice($_POST['PizzaID']);
+
+if($_POST['size'] === 'S')
+	$price = ($pizza_price*.6);
+elseif($_POST['size'] === 'M')
+	$price = ($pizza_price*.8);
+else if($_POST['size'] === 'L')
+	$price = ($pizza_price);
+else 
+	$price = ($pizza_price * 1.25);
+
+$price *= $_POST['quantity'];
+
+$price = number_format($price, 2);
+
+array_push($_SESSION['cart']['order'], array("PizzaID"=>$_POST['PizzaID'], "Size"=>$_POST['size'], "Quantity"=>$_POST['quantity'], "Price"=>$price));
 
 echo '<h1>Cart</h1>';
 
@@ -58,10 +73,11 @@ function printItem($item)
 	echo '<li class="entry">';
 	echo '<table class="entry-table">';
 	echo '<tr>';
-	echo '<td><img src="assets/images/' . getPizzaImage($item['PizzaID'])[0] . '"></td>';
-	echo '<td><h3>' . getPizzaName($item['PizzaID'])[0] . ' Pizza</h3></td>';
+	echo '<td><img src="assets/images/' . getPizzaImage($item['PizzaID']) . '"></td>';
+	echo '<td><h3>' . getPizzaName($item['PizzaID']) . ' Pizza</h3></td>';
 	echo '<td><strong>Size:</strong><br>' . $item['Size'] . '</td>';
 	echo '<td><strong>Quantity:</strong><br>' . $item['Quantity'] .'</td>';
+	echo '<td><strong>Price:</strong><br>$' . $item['Price'] . '</td>';
 	echo '</tr>';
 	echo '</table>';
 	echo '</li>';
@@ -71,14 +87,21 @@ function getPizzaName($pizzaID)
 {
 	$sql = "SELECT pizzaName FROM pizza WHERE pizzaID='$pizzaID'";
 	$result = mysql_query($sql);
-	return mysql_fetch_row($result);
+	return mysql_fetch_row($result)[0];
 }
 
 function getPizzaImage($pizzaID)
 {
 	$sql = "SELECT imageName FROM pizza WHERE pizzaID='$pizzaID'";
-	$result = $result = mysql_query($sql);
-	return mysql_fetch_row($result);
+	$result = mysql_query($sql);
+	return mysql_fetch_row($result)[0];
+}
+
+function getPizzaPrice($pizzaID)
+{
+	$sql = "SELECT price FROM pizza WHERE pizzaID='$pizzaID'";
+	$result = mysql_query($sql);
+	return mysql_fetch_row($result)[0];
 }
 
 ?>

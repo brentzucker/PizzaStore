@@ -94,6 +94,7 @@ main
 	border: 2px solid #e1d3c1;
 	background-color: #fdf9f3;
 	border-radius:5px;
+	opacity:.8;
 }
 
 .frontpage_pizza a
@@ -107,6 +108,7 @@ main
 	text-decoration: none;
 	color: #322f2b;
 	background:#faebd7;
+	opacity:1;
 }
 
 .main
@@ -153,6 +155,18 @@ main
 	margin:0;
 }
 
+.cartbutton:hover
+{
+	cursor:pointer;
+	cursor:hand;
+}
+
+.hand:hover
+{
+	cursor:pointer;
+	cursor:hand;
+}
+
 .menu h2
 {
 	text-align: center;
@@ -193,6 +207,18 @@ div.popout-cart
 	margin-left:25px;
 }
 
+.popout-cart form
+{
+	line-height:1;
+	font-size:12;
+	text-align:center;
+}
+
+.popout-cart h4
+{
+	text-align:center;
+}
+
 #exit_x
 {
 	border:1px solid #CD5555;
@@ -200,12 +226,6 @@ div.popout-cart
 	color:#660000;
 	background-color:#CD9B9B;
 	line-height:1;
-}
-
-.popout-cart form
-{
-	line-height:1;
-	font-size:12;
 }
 
 #qty

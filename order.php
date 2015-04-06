@@ -14,7 +14,12 @@ if($_SESSION['cart']['signin'] != 1)
 
 foreach($_SESSION['cart']['order'] as $order)
 	if($order['PizzaID'] > 0)
-		insertOrder($order['PizzaID'], $order['Size'], $order['Quantity'], $_SESSION['cart']['email']);
+	{
+		insertOrder($order['PizzaID'], $order['Size'], $order['Quantity'], $_SESSION['cart']['email'], $order['Price']);
+
+		//clear cart
+		$_SESSION['cart']['order'] = null;
+	}
 
 echo 'Your order has been placed. Thank you ' . getName($_SESSION['cart']['email']) . '.';
 
@@ -22,10 +27,10 @@ echo '</main>';
 
 footer_pizzastore();
 
-function insertOrder($pizzaID, $size, $quantity, $email)
+function insertOrder($pizzaID, $size, $quantity, $email, $price)
 {
 	$orderDate = date("Y-m-d");
-	$sql = "INSERT INTO orders(pizzaID, size, quantity, orderDate, Email) VALUES ('$pizzaID', '$size', '$quantity', '$orderDate', '$email')";
+	$sql = "INSERT INTO orders(pizzaID, size, quantity, orderDate, Email, Price) VALUES ('$pizzaID', '$size', '$quantity', '$orderDate', '$email', '$price')";
 	$result = mysql_query($sql);
 	return mysql_fetch_row($result);
 }

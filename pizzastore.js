@@ -1,4 +1,4 @@
-function addToCart(name, img, pizzaid)
+function addToCart(name, img, pizzaid, price)
 {
 	var pizza_name = name;
 	//var node = document.getElementById("Classic");
@@ -10,6 +10,7 @@ function addToCart(name, img, pizzaid)
 	var exit_x = document.createTextNode("X");
 	exit.setAttribute("id", "exit_x");
 	exit.setAttribute("onclick", "exitPopOut()");
+	exit.setAttribute("class", "hand");
 	exit.appendChild(exit_x);
 	
 	var header = document.createElement("H4");
@@ -27,22 +28,30 @@ function addToCart(name, img, pizzaid)
 	form.setAttribute("method", "POST");
 
 	//Create Radio Buttons
-	var size_text = document.createTextNode("S | M | L | XL");
-	//size_text.setAttribute("id", "size-text");
-	var BR = document.createElement("BR");
+	var small_price = document.createTextNode("$"+ (price*.6).toFixed(2));
+	var small = document.createTextNode("Small");
 	var radio_small = document.createElement("INPUT");
 	radio_small.setAttribute("type", "radio");
 	radio_small.setAttribute("name", "size");
 	radio_small.setAttribute("value", "S");
+
+	var med_price = document.createTextNode("$"+ (price*.8).toFixed(2));
+	var med = document.createTextNode("Medium");
 	var radio_med = document.createElement("INPUT");
 	radio_med.setAttribute("type", "radio");
 	radio_med.setAttribute("name", "size");
 	radio_med.setAttribute("value", "M");
+
+	var large_price = document.createTextNode("$"+ (price*1).toFixed(2));
+	var large = document.createTextNode("Large");
 	var radio_large = document.createElement("INPUT");
 	radio_large.setAttribute("type", "radio");
 	radio_large.setAttribute("name", "size");
 	radio_large.setAttribute("value", "L");
 	radio_large.setAttribute("checked", "");
+
+	var xl_price = document.createTextNode("$"+ (price*1.25).toFixed(2));
+	var xl = document.createTextNode("XL");
 	var radio_xl = document.createElement("INPUT");
 	radio_xl.setAttribute("type", "radio");
 	radio_xl.setAttribute("name", "size");
@@ -65,17 +74,44 @@ function addToCart(name, img, pizzaid)
 	var submit = document.createElement("INPUT");
 	submit.setAttribute("type", "submit");
 	submit.setAttribute("value", "Add to Cart");
+	submit.setAttribute("class", "hand");
 
 	//Append everything to form.
-	form.appendChild(size_text);
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(small_price);
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(small);
 	form.appendChild(document.createElement("BR"));
 	form.appendChild(radio_small);
+	form.appendChild(document.createElement("BR"));
+
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(med_price);
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(med);
+	form.appendChild(document.createElement("BR"));
 	form.appendChild(radio_med);
+	form.appendChild(document.createElement("BR"));
+
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(large_price);
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(large);
+	form.appendChild(document.createElement("BR"));
 	form.appendChild(radio_large);
+	form.appendChild(document.createElement("BR"));
+
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(xl_price);
+	form.appendChild(document.createElement("BR"));
+	form.appendChild(xl);
+	form.appendChild(document.createElement("BR"));
 	form.appendChild(radio_xl);
 	form.appendChild(document.createElement("BR"));
+	
+	form.appendChild(document.createElement("BR"));
 	form.appendChild(quantity);
-	form.appendChild(BR);
+	form.appendChild(document.createElement("BR"));
 	form.appendChild(id);
 	form.appendChild(submit);
 

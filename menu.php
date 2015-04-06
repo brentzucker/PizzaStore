@@ -23,7 +23,7 @@ function retrievePizzaData($t)
 {
 	$type = $t; 
 
-	$query = "SELECT pizzaName, imageName, pizzaID FROM pizza WHERE type='$type'";
+	$query = "SELECT pizzaName, imageName, pizzaID, price FROM pizza WHERE type='$type'";
 
 	$result = mysql_query($query);
 
@@ -38,11 +38,12 @@ function retrievePizzaData($t)
 		$name = $row[0];
 		$img = $row[1];
 		$pizzaID = $row[2];
+		$price = $row[3];
 
 		echo '<li>';
 		echo '<h3>' . $name . '</h3>';
 		echo '<img src="assets/images/' . $img . '">';
-		echo "<div class=\"cartbutton\" onclick=\"addToCart('$name', '$img', '$pizzaID')\"><h5>Add To Cart</h5></div>";
+		echo "<div class=\"cartbutton\" onclick=\"addToCart('$name', '$img', '$pizzaID', '$price')\"><h5>Add To Cart</h5></div>";
 		echo '</li>';
 	}
 	echo '</ul>';

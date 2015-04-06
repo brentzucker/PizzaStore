@@ -17,7 +17,7 @@ $frontpage_pizza = array(
 		"link"=>"menu.php#Carnivore"),
 	array("title"=>"Classics",
 		"img"=>"classic.png",
-		"link"=>"menu.php#Classics")
+		"link"=>"menu.php#Classic")
 	);
 
 
